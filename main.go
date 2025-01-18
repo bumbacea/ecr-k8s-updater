@@ -4,21 +4,22 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"log"
+	"net/url"
+	"os"
+
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/ecr"
-	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/registry"
 	_ "github.com/joho/godotenv/autoload"
 	v13 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
-	"log"
-	"net/url"
-	"os"
 )
 
-func main()  {
+func main() {
 	// Load the Shared AWS Configuration (~/.aws/config)
 	cfg, err := config.LoadDefaultConfig(context.TODO())
 	if err != nil {
@@ -38,15 +39,15 @@ func main()  {
 	if err != nil {
 		log.Fatal(err)
 	}
-	data := make(map[string]types.AuthConfig)
+	data := make(map[string]registry.AuthConfig)
 	//types.AuthConfig{}
 	for _, v := range token.AuthorizationData {
 		u, err := url.Parse(*v.ProxyEndpoint)
 		if err != nil {
 			log.Fatal(err)
 		}
-		data[u.Host] = types.AuthConfig{
-			Auth: *v.AuthorizationToken,
+		data[u.Host] = registry.AuthConfig{
+			Auth:          *v.AuthorizationToken,
 			ServerAddress: *v.ProxyEndpoint,
 		}
 	}
@@ -70,7 +71,7 @@ func main()  {
 		}
 		secret := v13.Secret{
 			ObjectMeta: metav1.ObjectMeta{
-				Name: secretName,
+				Name:      secretName,
 				Namespace: namespaceName,
 			},
 
