@@ -1,8 +1,6 @@
 module github.com/alexbumbacea/ecr-k8s-updater
 
-go 1.23.0
-
-toolchain go1.23.9
+go 1.25.0
 
 require (
 	github.com/aws/aws-sdk-go-v2/config v1.5.0
@@ -39,11 +37,11 @@ require (
 	github.com/opencontainers/image-spec v1.0.2 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	golang.org/x/net v0.40.0 // indirect
+	golang.org/x/net v0.55.0 // indirect
 	golang.org/x/oauth2 v0.27.0 // indirect
-	golang.org/x/sys v0.33.0 // indirect
-	golang.org/x/term v0.32.0 // indirect
-	golang.org/x/text v0.25.0 // indirect
+	golang.org/x/sys v0.45.0 // indirect
+	golang.org/x/term v0.43.0 // indirect
+	golang.org/x/text v0.37.0 // indirect
 	golang.org/x/time v0.0.0-20210220033141-f8bda1e9f3ba // indirect
 	google.golang.org/protobuf v1.33.0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
