@@ -1,4 +1,4 @@
-FROM golang:1.26 as builder
+FROM golang:1.27 as builder
 WORKDIR /go/src/github.com/alexbumbacea/ecr-k8s-updater
 COPY go.* ./
 RUN go mod download
